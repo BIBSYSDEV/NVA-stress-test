@@ -12,15 +12,6 @@ import static io.gatling.javaapi.http.HttpDsl.*;
 
 public class SearchSimulation extends Simulation {
 
-  @Override
-  public void before() {
-    super.before();
-
-//    AwsCredentials awsCredentials = DefaultCredentialsProvider.create().resolveCredentials();
-
-  }
-
-
   private final HttpProtocolBuilder httpProtocol = http
     .baseUrl("https://api.e2e.nva.aws.unit.no")
     .inferHtmlResources(AllowList(), DenyList(".*\\.js", ".*\\.css", ".*\\.gif", ".*\\.jpeg", ".*\\.jpg", ".*\\.ico", ".*\\.woff", ".*\\.woff2", ".*\\.(t|o)tf", ".*\\.png", ".*\\.svg", ".*detectportal\\.firefox\\.com.*"))
@@ -34,21 +25,6 @@ public class SearchSimulation extends Simulation {
   public static final String PAGING = "%22&results=10&from=0";
   private static final String QUERY_URI = "/search/resources?query=%22" + QUERY + PAGING;
   private static final String FILTER_URI = QUERY_URI + "%22+AND+%28entityDescription.contributors.identity.id%3A%22https%3A%2F%2Fapi.e2e.nva.aws.unit.no%2Fcristin%2Fperson%2F1137659%22%29" + PAGING;
-
-  private static class StartPage {
-
-    private static final ChainBuilder startPage =
-      feed(csv("data/users.csv").eager().circular())
-      .exec(session -> session.set("accessToken", Aws.login(session.get("userName"))))
-      .exec(
-        http("Startpage")
-        .get(NVA_URI + "/")
-        .basicAuth("osteloff","osteloff")
-        .resources(http("Manifest")
-            .get(NVA_URI + "/manifest.json")
-            .check(status().is(401)), http("Resources")
-            .get("/search/resources?")));
-  }
 
   private static class Search {
     private static final ChainBuilder query =

@@ -1,10 +1,14 @@
 package no.sikt.nva;
 
+import io.gatling.javaapi.core.Session;
 import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityProviderClient;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.AdminInitiateAuthRequest;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.AdminSetUserPasswordRequest;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Aws {
 
@@ -30,6 +34,7 @@ public class Aws {
                             .permanent(true)
                             .build()
             );
+            System.out.println(adminSetUserPasswordResponse);
             var authResponse = identityProvider.adminInitiateAuth(
                     AdminInitiateAuthRequest.builder()
                             .userPoolId(USER_POOL_ID)
@@ -38,9 +43,25 @@ public class Aws {
                             .authParameters(authParameters)
                             .build());
             accessToken = authResponse.authenticationResult().accessToken();
+            System.out.println(authResponse);
+        } catch (Exception e) {
+            System.out.println("-----------------");
+            System.out.println(e);
+            System.out.println("-----------------");
         }
 
+        System.out.println(accessToken);
+
         return accessToken;
+    }
+
+    static Map<String, String> getUserMap(Session session) {
+        Map<String, String> userMap = new TreeMap<>();
+        List<Map<String, String>> userData = (List<Map<String, String>>) session.getList("login").get(0);
+        userData.forEach(object -> {
+            userMap.put(object.get("Name"), object.get("Value"));
+        });
+        return userMap;
     }
 
 }
