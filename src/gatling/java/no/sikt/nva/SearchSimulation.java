@@ -26,40 +26,6 @@ public class SearchSimulation extends Simulation {
   private static final String QUERY_URI = "/search/resources?query=%22" + QUERY + PAGING;
   private static final String FILTER_URI = QUERY_URI + "%22+AND+%28entityDescription.contributors.identity.id%3A%22https%3A%2F%2Fapi.e2e.nva.aws.unit.no%2Fcristin%2Fperson%2F1137659%22%29" + PAGING;
 
-  private static class Search {
-    private static final ChainBuilder query =
-      exec(http("Query")
-        .get(QUERY_URI));
-
-    private static final ChainBuilder filterPerson =
-      exec( http("FilterPerson")
-        .get(FILTER_URI)
-          .check(jmesPath("hits[0].associatedArtifacts[0].identifier").saveAs("fileIdentifier"))
-          .check(jmesPath("hits[0].identifier").saveAs("identifier")));
-  }
-
-  private static class LandingPage {
-    private static final ChainBuilder landingPage =
-      exec(http("LandingPage")
-        .get("/publication/#{identifier}")
-              .check(jmesPath("projects[0].id").saveAs("projectUri"))
-              .check(jmesPath("entityDescription.reference.publicationContext.id").saveAs("journalUri"))
-              .check(jmesPath("entityDescription.contributors[0].affiliations[0].id").saveAs("organizationUri"))
-        .resources(
-          http("Associated registrations")
-            .get("/search/resources?query=%22#{identifier}%22%20AND%20NOT%20(identifier:%22#{identifier}%22)"),
-          http("Organization")
-            .get("#{organizationUri}"),
-          http("Crawler")
-            .get("/publication/#{identifier}"),
-          http("Journal")
-            .get("#{journalUri}"),
-          http("Project")
-            .get("#{projectUri}"),
-          http("File")
-            .get("/download/public/#{identifier}/files/#{fileIdentifier}")));
-
-  }
 
   private final ScenarioBuilder scn = scenario("SearchSimulation")
     .pause(5)
