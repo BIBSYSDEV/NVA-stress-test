@@ -8,7 +8,7 @@ import java.util.Map;
 import static io.gatling.javaapi.core.CoreDsl.*;
 import static io.gatling.javaapi.http.HttpDsl.http;
 
-final class Project {
+public final class Project {
 
     private static final Map<CharSequence, String> headers_5 = Map.ofEntries(
             Map.entry("origin", "https://e2e.nva.aws.unit.no"),
@@ -20,14 +20,14 @@ final class Project {
             Map.entry("sec-fetch-site", "same-site")
     );
 
-    static final ChainBuilder get =
-                exec(http("Project")
-                    .get("#{projectUri}"));
+    public static final ChainBuilder get =
+            exec(http("Project")
+                .get("#{projectUri}"));
 
-    static final ChainBuilder search =
-                exec(http("SearchProject")
-                    .get("/cristin/project?query=test&results=10&page=1")
-                    .check(jmesPath("*").ofList().saveAs("project"))
-                    .headers(headers_5))
-                .exec(session -> session.set("projectUri", ((Map<?, ?>)((List<?>)session.getList("project").get(8)).get(0)).get("id")));
+    public static final ChainBuilder query =
+            exec(http("QueryProject")
+                .get("/cristin/project?query=test&results=10&page=1")
+                .check(jmesPath("*").ofList().saveAs("project"))
+                .headers(headers_5))
+            .exec(session -> session.set("projectUri", ((Map<?, ?>)((List<?>)session.getList("project").get(8)).get(0)).get("id")));
 }

@@ -40,15 +40,20 @@ class StartPage {
             Map.entry("x-amz-user-agent", "aws-amplify/5.0.4 auth framework/0")
     );
 
-    private static final String NVA_URI = "https://e2e.nva.aws.unit.no";
+//    private static final String NVA_URI = "https://e2e.nva.aws.unit.no";
+    private static final String NVA_URI = "https://test.nva.sikt.no";
+//    private static final String NVA_API_URI = "https://api.e2e.nva.aws.unit.no";
+    private static final String NVA_API_URI = "https://api.test.nva.aws.unit.no";
     private static final String COGNITO_URI = "https://cognito-idp.eu-west-1.amazonaws.com";
 
     static final ChainBuilder startPage =
         feed(csv("data/users.csv").eager().circular())
-            .exec(session -> session.set("accessToken", Aws.login(session.get("userName"))))
+//            .exec(session -> session.set("accessToken", Aws.login(session.get("userName"))))
             .exec(http("Startpage")
                 .get(NVA_URI + "/")
                 .basicAuth("osteloff","osteloff"))
+                .exec(session -> session.set("nvaApiUri", NVA_API_URI))
+                .exec(session -> session.set("nvaUri", NVA_URI))
             .exec(http("Resources")
                 .get("/search/resources?"));
 

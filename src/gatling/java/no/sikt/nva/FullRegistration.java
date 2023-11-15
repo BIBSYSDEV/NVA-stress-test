@@ -1,15 +1,10 @@
 package no.sikt.nva;
 
-import java.time.Duration;
-import java.util.*;
-
 import io.gatling.javaapi.core.*;
 import io.gatling.javaapi.http.*;
-import io.gatling.javaapi.jdbc.*;
 
 import static io.gatling.javaapi.core.CoreDsl.*;
 import static io.gatling.javaapi.http.HttpDsl.*;
-import static io.gatling.javaapi.jdbc.JdbcDsl.*;
 
 public class FullRegistration extends Simulation {
 
@@ -26,7 +21,7 @@ public class FullRegistration extends Simulation {
           .pause(5)
           .exec(Publication.create)
           .pause(7)
-          .exec(Project.search)
+          .exec(Project.query)
           .exec(session -> {
               System.out.println(session.getString("projectUri"));
               return session;

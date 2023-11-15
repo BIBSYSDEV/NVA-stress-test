@@ -3,12 +3,21 @@ package no.sikt.nva;
 import io.gatling.javaapi.core.ChainBuilder;
 
 import static io.gatling.javaapi.core.CoreDsl.exec;
+import static io.gatling.javaapi.core.CoreDsl.jmesPath;
 import static io.gatling.javaapi.http.HttpDsl.http;
 
-class Organization {
+public class Organization {
 
-    static final ChainBuilder get =
+    public static final ChainBuilder get =
         exec(http("Organization")
-                .get("https://api.e2e.nva.aws.unit.no/cristin/organization/#{organizationId}"));
+            .get("#{apiUri}/cristin/organization/#{organizationId}"));
 
+    public static final ChainBuilder query =
+        exec(http("QueryOrganization")
+            .get("/cristin/organization?query=ntnu")
+                .check(jmesPath("hits[0].id")
+                        .ofString()
+                        .transform(uri -> uri.split("/")[uri.split("/").length - 1])
+                        .transform(id -> id.replace(".0.0.0", ""))
+                        .saveAs("organizationId")));
 }

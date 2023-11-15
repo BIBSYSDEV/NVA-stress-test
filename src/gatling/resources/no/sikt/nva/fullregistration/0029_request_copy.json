@@ -3,7 +3,7 @@
   "identifier": "#{identifier}",
   "status": "DRAFT",
   "resourceOwner": {
-    "owner": "#{cristinId}@20754.0.0.0",
+    "owner": "#{personId}@20754.0.0.0",
     "ownerAffiliation": "https://api.e2e.nva.aws.unit.no/cristin/organization/#{organizationId}"
   },
   "publisher": {

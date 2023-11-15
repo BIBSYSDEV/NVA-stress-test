@@ -10,16 +10,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-final class Aws {
+public final class Aws {
 
-    private static final String USER_POOL_ID = "eu-west-1_lfd37eQxM";
-    private static final String CLIENT_ID = "4ekg7vjqp0upin62bp3ikj00ts";
+//    private static final String USER_POOL_ID = "eu-west-1_lfd37eQxM";
+//    private static final String CLIENT_ID = "4ekg7vjqp0upin62bp3ikj00ts";
+    private static final String USER_POOL_ID = "eu-west-1_zROj9DNSx";
+    private static final String CLIENT_ID = "h82a2vupd55fipmjkhhrjije8";
     private static final String AUTH_FLOW = "ADMIN_USER_PASSWORD_AUTH";
     private static final String USER = "test-user-with-author@test.no";
     private static final String PASSWORD = "P_1234_abcd";
 
 
-    static String login(String userName) {
+    public static String login(String userName) {
 
         var accessToken = "";
         try (var identityProvider = CognitoIdentityProviderClient.builder().build()) {

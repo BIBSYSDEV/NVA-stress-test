@@ -74,20 +74,18 @@ class Publication {
     );
 
 
-    private static final String NVA_API_URI = "https://api.e2e.nva.aws.unit.no";
-
     static final ChainBuilder create =
             exec(http("CreatePublicationOptions")
-                    .options(NVA_API_URI + "/publication")
+                    .options("#{nvaApiUri}/publication")
                     .headers(headers_6))
             .exec(http("CreatePublication")
-                    .post(NVA_API_URI + "/publication")
+                    .post( "#{nvaApiUri}/publication")
                     .headers(headers_4)
                     .check(jmesPath("identifier").saveAs("identifier")));
 
     static final ChainBuilder get =
             exec(http("GetPublication")
-                    .get(NVA_API_URI + "/publication/#{identifier}")
+                    .get("/publication/#{identifier}")
                     .headers(headers_5));
 
     static final ChainBuilder put =
