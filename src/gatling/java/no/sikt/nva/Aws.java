@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Aws {
+final class Aws {
 
     private static final String USER_POOL_ID = "eu-west-1_lfd37eQxM";
     private static final String CLIENT_ID = "4ekg7vjqp0upin62bp3ikj00ts";
@@ -46,18 +46,4 @@ public class Aws {
 
         return accessToken;
     }
-
-    static String getUserData(Session session, String key) {
-        return getUserMap(session).get(key);
-    }
-
-    private static Map<String, String> getUserMap(Session session) {
-        Map<String, String> userMap = new TreeMap<>();
-        List<Map<String, String>> userData = (List<Map<String, String>>) session.getList("login").get(0);
-        userData.forEach(object -> {
-            userMap.put(object.get("Name"), object.get("Value"));
-        });
-        return userMap;
-    }
-
 }

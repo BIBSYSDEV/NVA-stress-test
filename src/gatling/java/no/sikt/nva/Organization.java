@@ -9,6 +9,6 @@ class Organization {
 
     static final ChainBuilder get =
         exec(http("Organization")
-                .get("#{organizationUri}"));
+                .get("https://api.e2e.nva.aws.unit.no/cristin/organization/#{organizationId}"));
 
 }
