@@ -30,4 +30,9 @@ public final class Project {
                 .check(jmesPath("*").ofList().saveAs("project"))
                 .headers(headers_5))
             .exec(session -> session.set("projectUri", ((Map<?, ?>)((List<?>)session.getList("project").get(8)).get(0)).get("id")));
+
+    public static final ChainBuilder getProjectsByOrganization =
+            exec(http("ProjectByOrganization")
+                .get("/cristin/organization/20202.0.0.0/projects"));
+
 }

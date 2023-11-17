@@ -45,7 +45,7 @@ public class FullRegistration extends Simulation {
 //          .exec(File.complete)
           .pause(5)
           .exec(Publication.put)
-          .exec(Publication.getTickets)
+          .exec(Publication.ticketsForPublication)
           .exec(Publication.get)
 //          .exec(File.get)
           .exec(Search.associatedRegistrations)

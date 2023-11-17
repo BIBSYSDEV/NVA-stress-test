@@ -30,7 +30,7 @@ public class Person {
     );
 
     private static final Map<CharSequence, String> headers_5 = Map.ofEntries(
-            Map.entry("origin", "https://e2e.nva.aws.unit.no"),
+            Map.entry("origin", "https://test.nva.aws.unit.no"),
             Map.entry("sec-ch-ua", "Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99"),
             Map.entry("sec-ch-ua-mobile", "?0"),
             Map.entry("sec-ch-ua-platform", "Windows"),
@@ -52,14 +52,20 @@ public class Person {
     public static final ChainBuilder personsByOrganization =
         exec(http("PersonsByOrganization")
             .get("/cristin/organization/#{organizationId}.0.0.0/persons")
-            .check(jmesPath("hits[0].identifiers[0].value").ofString().saveAs("personId"))
-            .headers(headers_0));
+            .check(jmesPath("hits[0].identifiers[0].value").ofString().saveAs("personId")));
 
     public static final ChainBuilder employments =
         exec(http("EmploymentsOptions")
             .options("#{apiUri}/cristin/person/#{personId}/employment")
-            .headers(headers_0)
             .resources(http("Employments")
                 .get("#{apiUri}/cristin/person/#{personId}/employment")
                 .headers(headers_1)));
+
+    public static final ChainBuilder personInOrganization =
+                exec(
+        http("PersonOrganizationOptions")
+        .options("/cristin/person/#{personId}/organization/#{organizationId}.0.0.0")
+        .resources(http("PersonOrganization")
+            .get("/cristin/person/#{personId}/organization/#{organizationId}.0.0.0")
+            .headers(headers_1)));
 }

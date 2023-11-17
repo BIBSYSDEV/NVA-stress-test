@@ -30,31 +30,28 @@ public class Cristin {
     );
 
 
-    public static final ChainBuilder fundingSources =
+    public static final ChainBuilder listFundingSources =
         exec(http("FundingSources")
             .get("/cristin/funding-sources")
-            .headers(headers_0)
-    );
+            .check(jmesPath("sources[0].id")
+                    .ofString()
+                    .transform(uri -> uri.split("/")[uri.split("/").length -1])
+                    .saveAs("fundingSourceId")));
 
-    public static final ChainBuilder personsByOrganization =
-        exec(http("PersonsByOrganization")
-            .get("/cristin/organization/#{organizationId}.0.0.0/persons")
-                .check(jmesPath("hits[0].identifiers[0].value").ofString().saveAs("personId"))
-            .headers(headers_0)
-    );
+    public static final ChainBuilder getFundingSources =
+        exec(http("GetFundingSource")
+        .get("/cristin/funding-sources/#{fundingSourceId}"));
 
-    public static final ChainBuilder employments =
-        exec(http("EmploymentsOptions")
-        .options("#{apiUri}/cristin/person/#{personId}/employment")
-        .headers(headers_0)
-        .resources(http("Employments")
-            .get("#{apiUri}/cristin/person/#{personId}/employment")
-            .headers(headers_1)));
+    public static final ChainBuilder keywords =
+        exec(http("Keywords")
+        .get("/cristin/keyword"));
+
 
     public static final ChainBuilder picture =
         exec(http("Picture")
-        .get("/cristin/person/43419/picture")
-        .headers(headers_0)
-    );
+        .get("/cristin/person/43419/picture"));
 
+    public static final ChainBuilder positions =
+        exec(http("Positions")
+        .get("/cristin/position"));
 }

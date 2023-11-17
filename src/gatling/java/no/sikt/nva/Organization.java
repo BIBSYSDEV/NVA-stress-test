@@ -9,8 +9,12 @@ import static io.gatling.javaapi.http.HttpDsl.http;
 public class Organization {
 
     public static final ChainBuilder get =
-        exec(http("Organization")
-            .get("#{apiUri}/cristin/organization/#{organizationId}"));
+        exec(session -> {
+            System.out.println(session.getString("organizationId"));
+            return session;
+        })
+        .exec(http("Organization")
+            .get("/cristin/organization/#{organizationId}.0.0.0"));
 
     public static final ChainBuilder query =
         exec(http("QueryOrganization")
