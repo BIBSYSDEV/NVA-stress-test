@@ -19,7 +19,7 @@ public class SpeedTest extends Simulation {
     .userAgentHeader("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36");
   
 private static final String NVA_API_URI = "https://api.test.nva.aws.unit.no";
-private static final String TEST_ORGANIZATION = "20202";
+private static final String TEST_ORGANIZATION = "194";
 
   private final ScenarioBuilder scn = scenario("SpeedTest")
       .exec(session -> session.set("accessToken", Aws.login("Dataporten_c924937b-f153-4836-bb7a-401893b27ba8")))
@@ -50,12 +50,28 @@ private static final String TEST_ORGANIZATION = "20202";
 //      .exec(Customer.doiAgent)
 //      .exec(Customer.vocabularies)
 
-      .exec(Publication.byOwner)
-      .exec(Publication.context)
-      .exec(Publication.get)
-      .exec(Publication.ticketsForPublication)
-      .exec(Publication.ticketsForUser)
-      .exec(Publication.getTicket)
+//      .exec(Publication.byOwner)
+//      .exec(Publication.context)
+//      .exec(Publication.get)
+//      .exec(Publication.ticketsForPublication)
+//      .exec(Publication.ticketsForUser)
+//      .exec(Publication.getTicket)
+
+//          .exec(Journal.query)
+//          .exec(Journal.get)
+//          .exec(Series.query)
+//          .exec(Series.get)
+//          .exec(Publisher.query)
+//          .exec(Publisher.get)
+
+//      .exec(User.query)
+//      .exec(User.get)
+//      .exec(User.role)
+//      .exec(User.userInfo)
+
+      .exec(Nvi.query)
+      .exec(Nvi.get)
+      .exec(Nvi.period)
       ;
 
   {

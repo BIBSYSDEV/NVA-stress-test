@@ -36,10 +36,6 @@ public final class Customer {
         .headers(headers_0)
         .resources(http("ListCustomers")
             .get("/customer/")
-//            .check(jmesPath("customers[0].id")
-//                .ofString()
-//                .transform(uri -> uri.split("/")[uri.split("/").length - 1])
-//                .saveAs("customerId"))
             .check(jmesPath("customers")
                 .ofList()
                 .saveAs("customerList"))
@@ -73,7 +69,7 @@ public final class Customer {
             .headers(headers_1));
 
     public static final ChainBuilder vocabularies =
-        exec(http("VocaubulariesOptions")
+        exec(http("VocabulariesOptions")
         .options("/customer/#{customerId}/vocabularies")
         .headers(headers_0)
         .resources(http("Vocabularies")

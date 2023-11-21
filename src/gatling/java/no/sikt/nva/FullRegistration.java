@@ -29,7 +29,7 @@ public class FullRegistration extends Simulation {
           .pause(5)
           .exec(Project.get)
           .pause(5)
-          .exec(Journal.search)
+          .exec(Journal.query)
           .pause(5)
           .exec(Journal.get)
           .pause(5)
