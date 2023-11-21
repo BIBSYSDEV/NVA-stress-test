@@ -26,7 +26,6 @@ final class Search {
     private static final String QUERY_URI = NVA_API_URI + "/search/resources?query=%22" + QUERY + PAGING;
     private static final String FILTER_URI = QUERY_URI + "%22+AND+%28entityDescription.contributors.identity.id%3A%22https%3A%2F%2Fapi.e2e.nva.aws.unit.no%2Fcristin%2Fperson%2F1137659%22%29" + PAGING;
 
-
     static ChainBuilder listResources =
             exec(http("Resources")
                 .get(NVA_API_URI + "/search/resources?")

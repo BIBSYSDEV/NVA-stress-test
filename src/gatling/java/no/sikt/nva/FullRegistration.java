@@ -22,10 +22,6 @@ public class FullRegistration extends Simulation {
           .exec(Publication.create)
           .pause(7)
           .exec(Project.query)
-          .exec(session -> {
-              System.out.println(session.getString("projectUri"));
-              return session;
-          })
           .pause(5)
           .exec(Project.get)
           .pause(5)

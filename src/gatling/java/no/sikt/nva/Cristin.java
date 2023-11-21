@@ -39,13 +39,12 @@ public class Cristin {
                     .saveAs("fundingSourceId")));
 
     public static final ChainBuilder getFundingSources =
-        exec(http("GetFundingSource")
+        listFundingSources.exec(http("GetFundingSource")
         .get("/cristin/funding-sources/#{fundingSourceId}"));
 
     public static final ChainBuilder keywords =
         exec(http("Keywords")
         .get("/cristin/keyword"));
-
 
     public static final ChainBuilder picture =
         exec(http("Picture")

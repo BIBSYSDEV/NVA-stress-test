@@ -2,6 +2,7 @@ package no.sikt.nva.speedtest;
 
 import io.gatling.javaapi.core.*;
 import io.gatling.javaapi.http.*;
+import net.sf.saxon.om.Chain;
 import no.sikt.nva.*;
 
 import static io.gatling.javaapi.core.CoreDsl.*;
@@ -21,58 +22,81 @@ public class SpeedTest extends Simulation {
 private static final String NVA_API_URI = "https://api.test.nva.aws.unit.no";
 private static final String TEST_ORGANIZATION = "194";
 
-  private final ScenarioBuilder scn = scenario("SpeedTest")
-      .exec(session -> session.set("accessToken", Aws.login("Dataporten_c924937b-f153-4836-bb7a-401893b27ba8")))
-      .exec(session -> session.set("apiUri", NVA_API_URI))
-      .exec(session -> session.set("organizationId", TEST_ORGANIZATION))
-//      .exec(Cristin.listFundingSources)
-//      .exec(Cristin.getFundingSources)
-//      .exec(Cristin.picture)
-//      .exec(Cristin.keywords)
-//      .exec(Cristin.positions)
-//
-//      .exec(Person.query)
-//      .exec(Person.personsByOrganization)
-//      .exec(Person.get)
-//      .exec(Person.personInOrganization)
-//
-//      .exec(Person.employments)
-//      .exec(Organization.query)
-//      .exec(Organization.get)
-//
-//      .exec(Project.query)
-//      .exec(Project.get)
-//      .exec(Project.getProjectsByOrganization)
-//
-//      .exec(Customer.list)
-//      .exec(Customer.get)
-//      .exec(Customer.findCustomerByCristinId)
-//      .exec(Customer.doiAgent)
-//      .exec(Customer.vocabularies)
+    private static final ChainBuilder cristin =
+            exec(Cristin.listFundingSources)
+            .exec(Cristin.getFundingSources)
+            .exec(Cristin.picture)
+            .exec(Cristin.keywords)
+            .exec(Cristin.positions);
 
-//      .exec(Publication.byOwner)
-//      .exec(Publication.context)
-//      .exec(Publication.get)
-//      .exec(Publication.ticketsForPublication)
-//      .exec(Publication.ticketsForUser)
-//      .exec(Publication.getTicket)
+    private static final ChainBuilder person =
+        exec(Person.query)
+        .exec(Person.personsByOrganization)
+        .exec(Person.get)
+        .exec(Person.personInOrganization)
+        .exec(Person.employments);
 
-//          .exec(Journal.query)
-//          .exec(Journal.get)
-//          .exec(Series.query)
-//          .exec(Series.get)
-//          .exec(Publisher.query)
-//          .exec(Publisher.get)
+    private static final ChainBuilder organization =
+        exec(Organization.query)
+        .exec(Organization.get);
 
-//      .exec(User.query)
-//      .exec(User.get)
-//      .exec(User.role)
-//      .exec(User.userInfo)
+    private static final ChainBuilder project =
+        exec(Project.query)
+        .exec(Project.get)
+        .exec(Project.getProjectsByOrganization);
 
-      .exec(Nvi.query)
-      .exec(Nvi.get)
-      .exec(Nvi.period)
-      ;
+    private static final ChainBuilder customer =
+        exec(Customer.list)
+        .exec(Customer.get)
+        .exec(Customer.findCustomerByCristinId)
+        .exec(Customer.doiAgent)
+        .exec(Customer.vocabularies);
+
+    private static final ChainBuilder publication =
+        exec(Publication.byOwner)
+        .exec(Publication.context)
+        .exec(Publication.get)
+        .exec(Publication.ticketsForPublication)
+        .exec(Publication.ticketsForUser)
+        .exec(Publication.getTicket);
+
+    private static final ChainBuilder journal =
+        exec(Journal.query)
+        .exec(Journal.get);
+
+    private static final ChainBuilder series =
+        exec(Series.query)
+        .exec(Series.get);
+
+    private static final ChainBuilder publisher =
+        exec(Publisher.query)
+        .exec(Publisher.get);
+
+    private static final ChainBuilder user =
+        exec(User.query)
+        .exec(User.get)
+        .exec(User.role)
+        .exec(User.userInfo);
+
+    private static final ChainBuilder nvi =
+        exec(Nvi.query)
+        .exec(Nvi.get)
+        .exec(Nvi.period);
+
+    private final ScenarioBuilder scn = scenario("SpeedTest")
+        .exec(session -> session.set("accessToken", Aws.login("Dataporten_c924937b-f153-4836-bb7a-401893b27ba8")))
+        .exec(session -> session.set("apiUri", NVA_API_URI))
+        .exec(session -> session.set("organizationId", TEST_ORGANIZATION))
+        .exec(cristin)
+        .exec(person)
+        .exec(organization)
+        .exec(project)
+        .exec(customer)
+        .exec(journal)
+        .exec(series)
+        .exec(publisher)
+        .exec(user)
+        .exec(nvi);
 
   {
       setUp(scn.injectOpen(atOnceUsers(1))).protocols(httpProtocol);

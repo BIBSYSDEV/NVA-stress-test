@@ -30,7 +30,6 @@ public class Nvi {
                 .check(jmesPath("hits[0].identifier").ofString().saveAs("candidateId"))
             .headers(headers_1)))
                 .exec(session -> {
-                    System.out.println(session.getString("queryRespons"));
                     return session;
                 });
 

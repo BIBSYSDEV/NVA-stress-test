@@ -48,12 +48,7 @@ public final class Customer {
                                         .toList()
                                         .get(0))
                                         .get("id"))
-                                        .split("/")[4]
-            ))
-            .exec(session -> {
-                System.out.println(session.getString("customerId"));
-                return session;
-            });
+                                        .split("/")[4]));
 
 
     public static final ChainBuilder get =
