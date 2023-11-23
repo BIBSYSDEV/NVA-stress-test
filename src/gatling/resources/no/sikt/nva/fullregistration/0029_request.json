@@ -1,0 +1,261 @@
+{
+  "type": "Publication",
+  "identifier": "#{identifier}",
+  "status": "DRAFT",
+  "resourceOwner": {
+    "owner": "#{personId}@20754.0.0.0",
+    "ownerAffiliation": "https://api.e2e.nva.aws.unit.no/cristin/organization/#{organizationId}"
+  },
+  "publisher": {
+    "type": "Organization",
+    "id": "#{customerUri}",
+    "labels": {}
+  },
+  "createdDate": "2023-11-02T13:20:15.289554825Z",
+  "modifiedDate": "2023-11-02T13:20:15.289554825Z",
+  "projects": [
+    {
+      "type": "ResearchProject",
+      "id": "#{projectUri}",
+      "name": "Testprosjekt NVA"
+    }
+  ],
+  "fundings": [],
+  "subjects": [],
+  "associatedArtifacts": [],
+  "additionalIdentifiers": [],
+  "publicationNotes": [],
+  "@context": {
+    "@vocab": "https://nva.sikt.no/ontology/publication#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "id": "@id",
+    "type": "@type",
+    "affiliations": {
+      "@id": "affiliation",
+      "@container": "@set"
+    },
+    "activeFrom": {
+      "@type": "xsd:dateTime"
+    },
+    "activeTo": {
+      "@type": "xsd:dateTime"
+    },
+    "associatedArtifacts": {
+      "@id": "associatedArtifact",
+      "@container": "@set"
+    },
+    "additionalIdentifiers": {
+      "@id": "additionalIdentifier",
+      "@container": "@set"
+    },
+    "publicationNotes": {
+      "@id": "publicationNote",
+      "@container": "@set"
+    },
+    "alternativeTitles": {
+      "@id": "alternativeTitle",
+      "@container": "@language"
+    },
+    "approvals": {
+      "@id": "approval",
+      "@container": "@set"
+    },
+    "approvalStatus": {
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://nva.sikt.no/ontology/publication#"
+      }
+    },
+    "approvedBy": {
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://nva.sikt.no/ontology/approvals-body#"
+      }
+    },
+    "architectureOutput": {
+      "@id": "architectureOutput",
+      "@container": "@set"
+    },
+    "compliesWith": {
+      "@id": "compliesWith",
+      "@container": "@set"
+    },
+    "concertProgramme": {
+      "@id": "concertProgramme",
+      "@container": "@set"
+    },
+    "contributors": {
+      "@id": "contributor",
+      "@container": "@set"
+    },
+    "createdDate": {
+      "@type": "xsd:dateTime"
+    },
+    "date": {
+      "@type": "xsd:dateTime"
+    },
+    "doi": {
+      "@type": "@id"
+    },
+    "embargoDate": {
+      "@type": "xsd:dateTime"
+    },
+    "from": {
+      "@type": "xsd:dateTime"
+    },
+    "handle": {
+      "@type": "@id"
+    },
+    "indexedDate": {
+      "@type": "xsd:dateTime"
+    },
+    "isbnList": {
+      "@id": "isbn",
+      "@container": "@set"
+    },
+    "labels": {
+      "@id": "label",
+      "@container": "@language"
+    },
+    "language": {
+      "@type": "@id"
+    },
+    "link": {
+      "@type": "@id"
+    },
+    "manifestations": {
+      "@id": "manifestation",
+      "@container": "@set"
+    },
+    "metadataSource": {
+      "@type": "@id"
+    },
+    "modifiedDate": {
+      "@type": "xsd:dateTime"
+    },
+    "musicalWorks": {
+      "@id": "musicalWork",
+      "@container": "@set"
+    },
+    "ownerAffiliation": {
+      "@type": "@id"
+    },
+    "outputs": {
+      "@id": "output",
+      "@container": "@set"
+    },
+    "publishedDate": {
+      "@type": "xsd:dateTime"
+    },
+    "nameType": {
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://nva.sikt.no/ontology/publication#"
+      }
+    },
+    "projects": {
+      "@id": "project",
+      "@container": "@set"
+    },
+    "fundings": {
+      "@id": "funding",
+      "@container": "@set"
+    },
+    "related": {
+      "@id": "related",
+      "@container": "@set"
+    },
+    "referencedBy": {
+      "@id": "referencedBy",
+      "@container": "@set"
+    },
+    "role": {
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://nva.sikt.no/ontology/publication#"
+      }
+    },
+    "source": {
+      "@type": "@id"
+    },
+    "status": {
+      "@type": "@vocab",
+      "@context": {
+        "@vocab": "https://nva.sikt.no/ontology/publication#"
+      }
+    },
+    "subjects": {
+      "@id": "subject",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "tags": {
+      "@id": "tag",
+      "@container": "@set"
+    },
+    "to": {
+      "@type": "xsd:dateTime"
+    },
+    "trackList": {
+      "@id": "trackList",
+      "@container": "@set"
+    },
+    "venues": {
+      "@id": "venue",
+      "@container": "@set"
+    }
+  },
+  "id": "https://api.e2e.nva.aws.unit.no/publication/#[identifier]",
+  "entityDescription": {
+    "mainTitle": "Test",
+    "publicationDate": {
+      "type": "PublicationDate",
+      "year": "2023",
+      "month": "11",
+      "day": "2"
+    },
+    "reference": {
+      "publicationContext": {
+        "type": "Journal",
+        "id": "#{journalUri}"
+      },
+      "publicationInstance": {
+        "type": "AcademicArticle",
+        "articleNumber": "",
+        "issue": "",
+        "pages": {
+          "type": "Range",
+          "begin": "",
+          "end": ""
+        },
+        "volume": "",
+        "corrigendumFor": ""
+      },
+      "type": "Reference"
+    },
+    "contributors": [
+      {
+        "affiliations": [
+          {
+            "type": "Organization",
+            "id": "https://api.e2e.nva.aws.unit.no/cristin/organization/#{organizationId}.0.0.0"
+          }
+        ],
+        "correspondingAuthor": false,
+        "identity": {
+          "type": "Identity",
+          "id": "https://api.e2e.nva.aws.unit.no/cristin/person/#{personId}",
+          "name": "Eirik Nilsen",
+          "orcId": "",
+          "verificationStatus": "Verified"
+        },
+        "role": {
+          "type": "Creator"
+        },
+        "sequence": 1,
+        "type": "Contributor"
+      }
+    ],
+    "type": "EntityDescription"
+  }
+}

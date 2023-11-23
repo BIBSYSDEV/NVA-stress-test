@@ -1,2 +1,6 @@
 .gradle
 build
+/src/gatling/java/no/sikt/nva/speedtest/ApiCalls.java
+/src/gatling/java/no/sikt/nva/speedtest/PublicationApiCalls.java
+/src/gatling/java/no/sikt/nva/speedtest/Nvi.java
+/src/gatling/java/no/sikt/nva/speedtest/UsersRoles.java
