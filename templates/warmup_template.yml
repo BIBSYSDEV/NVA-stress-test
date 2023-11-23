@@ -42,7 +42,7 @@ Resources:
             Value: !GetAtt TestrunnerRole.Arn
       Source:
         Type: CODEPIPELINE
-        BuildSpec: template/buildspec.yml
+        BuildSpec: templates/buildspec.yml
   Pipeline:
     Type: AWS::CodePipeline::Pipeline
     Properties:
