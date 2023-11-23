@@ -10,7 +10,7 @@ env:
     API_DOMAIN: /NVA/ApiDomain
     ENV: /test/Stage
     USER_POOL_ID: /CognitoUserPoolId
-    CLIENT_ID: /COgnitoUserPoolAppClientId
+    CLIENT_ID: /CognitoUserPoolAppClientId
 
 phases:
   install:
