@@ -26,5 +26,5 @@ phases:
       - export CYPRESS_AWS_REGION='eu-west-1'
   build:
     commands:
-      # Get token
-      - ./gradlew gatlingRun-no.sikt.nva.speedtest.SpeedTest -DawsEnv=$(ENV) -DapiDomain=$(API_DOMAIN) -DuserPoolId=${USER_POOL_ID} -DclientId=${CLIENT_ID}
+      - gradle clean build
+      - gradle gatlingRun-no.sikt.nva.speedtest.SpeedTest -DawsEnv=$(ENV) -DapiDomain=$(API_DOMAIN) -DuserPoolId=${USER_POOL_ID} -DclientId=${CLIENT_ID}
