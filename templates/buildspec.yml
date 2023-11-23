@@ -27,4 +27,4 @@ phases:
   build:
     commands:
       - gradle clean build
-      - gradle gatlingRun-no.sikt.nva.speedtest.SpeedTest -DawsEnv=$(ENV) -DapiDomain=$(API_DOMAIN) -DuserPoolId=${USER_POOL_ID} -DclientId=${CLIENT_ID}
+      - gradle gatlingRun-no.sikt.nva.speedtest.SpeedTest -DawsEnv=$ENV -DapiDomain=$API_DOMAIN -DuserPoolId=$USER_POOL_ID -DclientId=$CLIENT_ID
