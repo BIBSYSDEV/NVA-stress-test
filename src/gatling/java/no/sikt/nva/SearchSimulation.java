@@ -22,7 +22,6 @@ public class SearchSimulation extends Simulation {
     public static final String PAGING = "%22&results=10&from=0";
     private static final String QUERY_URI = "/search/resources?query=%22" + QUERY + PAGING;
 
-
     private final ScenarioBuilder scn = scenario("SearchSimulation")
         .pause(5)
         .exec(StartPage.startPage)
@@ -34,7 +33,9 @@ public class SearchSimulation extends Simulation {
         .exec(LandingPage.landingPage);
 
     {
-    setUp(scn.injectOpen(rampUsers(1000).during(60))).protocols(httpProtocol);
-    //	  setUp(scn.injectOpen(atOnceUsers(1))).protocols(httpProtocol);
+
+        String env = System.getProperty("awsEnv", "e2e");
+//        setUp(scn.injectOpen(rampUsers(1000).during(60))).protocols(httpProtocol);
+        setUp(scn.injectOpen(atOnceUsers(1))).protocols(httpProtocol);
     }
 }

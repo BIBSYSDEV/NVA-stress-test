@@ -23,3 +23,4 @@ dependencies {
     gatlingImplementation 'software.amazon.awssdk:cognitoidentityprovider'
     gatlingImplementation 'software.amazon.awssdk:aws-core'
 }
+

@@ -1,8 +1,10 @@
 package no.sikt.nva;
 
 import io.gatling.javaapi.core.ChainBuilder;
+import io.gatling.javaapi.core.Session;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static io.gatling.javaapi.core.CoreDsl.exec;
 import static io.gatling.javaapi.core.CoreDsl.jmesPath;
@@ -40,15 +42,19 @@ public final class Customer {
                 .ofList()
                 .saveAs("customerList"))
             .headers(headers_1)))
-            .exec(session ->  session.set("customerId", ((String)((Map<?, ?>) session.getList("customerList")
-                                        .stream()
-                                        .filter(customer -> "Norges teknisk-naturvitenskapelige universitet"
-                                            .equals(((Map<?, ?>)customer)
-                                            .get("displayName")))
-                                        .toList()
-                                        .get(0))
-                                        .get("id"))
-                                        .split("/")[4]));
+            .exec(session ->  session.set("customerId", getCustomerId(session)));
+
+    private static String getCustomerId(Session session) {
+        return ((String) ((Map<?, ?>) session.getList("customerList")
+                .stream()
+                .filter(customer -> "Norges teknisk-naturvitenskapelige universitet"
+                        .equals(((Map<?, ?>) customer)
+                                .get("displayName")))
+                .collect(Collectors.toList())
+                .get(0))
+                .get("id"))
+                .split("/")[4];
+    }
 
 
     public static final ChainBuilder get =

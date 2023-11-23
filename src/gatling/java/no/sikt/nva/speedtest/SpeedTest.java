@@ -99,6 +99,8 @@ private static final String TEST_ORGANIZATION = "194";
         .exec(nvi);
 
   {
+      String env = System.getProperty("awsEnv", "e2e");
+      String apiDomain = System.getProperty("apiDomain", "api.e2e");
       setUp(scn.injectOpen(atOnceUsers(1))).protocols(httpProtocol);
 //      setUp(scn.injectOpen(rampUsers(100).during(60))).protocols(httpProtocol);
   }
