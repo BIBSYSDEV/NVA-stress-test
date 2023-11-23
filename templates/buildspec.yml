@@ -15,7 +15,7 @@ env:
 phases:
   install:
     runtime-versions:
-      python: 3.x
+      java: corretto11
   pre_build:
     commands:
       - export ROLE_ARM=arn:aws:iam::282305091481:role/service-role/codebuild-warmup-service-role
