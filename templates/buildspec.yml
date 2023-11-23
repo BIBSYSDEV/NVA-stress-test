@@ -24,6 +24,12 @@ phases:
       - export CYPRESS_AWS_SECRET_ACCESS_KEY=$(cat Credentials | jq -r '.Credentials.SecretAccessKey')
       - export CYPRESS_AWS_SESSION_TOKEN=$(cat Credentials | jq -r '.Credentials.SessionToken')
       - export CYPRESS_AWS_REGION='eu-west-1'
+      - echo '------'
+      - echo $ENV
+      - echo $API_DOMAIN
+      - echo $USER_POOL_ID
+      - echo $CLIENT_ID
+      - echo '------'
   build:
     commands:
       - gradle clean build
