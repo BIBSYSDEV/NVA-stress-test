@@ -19,7 +19,7 @@ public class SpeedTest extends Simulation {
     .originHeader("https://swagger-ui-internal.dev.nva.aws.unit.no")
     .userAgentHeader("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36");
   
-private static final String NVA_API_URI = "https://api.test.nva.aws.unit.no";
+private static final String NVA_API_URI = "https://" + Config.API_DOMAIN;
 private static final String TEST_ORGANIZATION = "194";
 
     private static final ChainBuilder cristin =
@@ -88,8 +88,8 @@ private static final String TEST_ORGANIZATION = "194";
         .exec(session -> session.set("apiUri", NVA_API_URI))
         .exec(session -> session.set("organizationId", TEST_ORGANIZATION))
         .exec(cristin)
-        .exec(person)
         .exec(organization)
+        .exec(person)
         .exec(project)
         .exec(customer)
         .exec(journal)
