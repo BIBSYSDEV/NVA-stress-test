@@ -31,7 +31,7 @@ Resources:
         Type: CODEPIPELINE
       Environment:
         ComputeType: BUILD_GENERAL1_LARGE
-        Image: aws/codebuild/standard:5.0
+        Image: aws/codebuild/standard:6.0
         Type: LINUX_CONTAINER
         EnvironmentVariables:
           - Name: S3_BUCKET
