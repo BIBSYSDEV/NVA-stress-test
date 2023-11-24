@@ -5,12 +5,6 @@ version: 0.2
 batch:
   fast-fail: true
 
-env:
-  parameter-store:
-    API_DOMAIN: /NVA/ApiDomain
-    ENV: /test/Stage
-    USER_POOL_ID: /CognitoUserPoolId
-    CLIENT_ID: /CognitoUserPoolAppClientId
 
 phases:
   install:
@@ -20,11 +14,7 @@ phases:
     commands:
       - export ROLE_ARM=arn:aws:iam::282305091481:role/service-role/codebuild-warmup-service-role
       - aws sts assume-role --role-arn $ROLE_ARN --role-session-name test > Credentials
-      - export CYPRESS_AWS_ACCESS_KEY_ID=$(cat Credentials | jq -r '.Credentials.AccessKeyId')
-      - export CYPRESS_AWS_SECRET_ACCESS_KEY=$(cat Credentials | jq -r '.Credentials.SecretAccessKey')
-      - export CYPRESS_AWS_SESSION_TOKEN=$(cat Credentials | jq -r '.Credentials.SessionToken')
-      - export CYPRESS_AWS_REGION='eu-west-1'
   build:
     commands:
       - gradle clean build
-      - gradle gatlingRun-no.sikt.nva.speedtest.SpeedTest -D "awsEnv=$ENV" -D "apiDomain=$API_DOMAIN" -D "userPoolId=$USER_POOL_ID" -D "clientId=$CLIENT_ID"
+      - gradle gatlingRun-no.sikt.nva.speedtest.SpeedTest
