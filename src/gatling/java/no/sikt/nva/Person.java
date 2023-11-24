@@ -50,7 +50,11 @@ public class Person {
         .headers(headers_5));
 
     public static final ChainBuilder personsByOrganization =
-        exec(http("PersonsByOrganization")
+        exec(session -> {
+                System.out.println(session.getString("organizationId"));
+                return session;
+            })
+        .exec(http("PersonsByOrganization")
             .get("/cristin/organization/#{organizationId}.0.0.0/persons")
             .check(jmesPath("hits[0].identifiers[0].value").ofString().saveAs("personId")));
 
