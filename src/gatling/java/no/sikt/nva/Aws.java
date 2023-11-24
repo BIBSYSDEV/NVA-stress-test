@@ -3,18 +3,30 @@ package no.sikt.nva;
 import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityProviderClient;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.AdminInitiateAuthRequest;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.AdminSetUserPasswordRequest;
+import software.amazon.awssdk.services.ssm.SsmClient;
+import software.amazon.awssdk.services.ssm.model.GetParameterRequest;
 
 import java.util.HashMap;
 
 public final class Aws {
 
-    private static final String USER_POOL_ID = Config.USER_POOL_ID;
-    private static final String CLIENT_ID = Config.CLIENT_ID;
+    private static final SsmClient ssmClient = SsmClient.builder().build();
+
+    private static final String USER_POOL_ID =
+            ssmClient.getParameter(GetParameterRequest.builder()
+                    .name("/CognitoUserPoolId")
+                    .build()).parameter().value();;
+    private static final String CLIENT_ID =
+            ssmClient.getParameter(GetParameterRequest.builder()
+                    .name("/CognitoUserPoolAppClientId")
+                    .build()).parameter().value();
     private static final String AUTH_FLOW = "ADMIN_USER_PASSWORD_AUTH";
     private static final String PASSWORD = "P_1234_abcd";
 
 
     public static String login(String userName) {
+
+        System.out.println(USER_POOL_ID);
 
         var accessToken = "";
         try (var identityProvider = CognitoIdentityProviderClient.builder().build()) {

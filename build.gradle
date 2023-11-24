@@ -22,5 +22,6 @@ dependencies {
     gatlingImplementation platform('software.amazon.awssdk:bom:2.21.1')
     gatlingImplementation 'software.amazon.awssdk:cognitoidentityprovider'
     gatlingImplementation 'software.amazon.awssdk:aws-core'
+    gatlingImplementation 'software.amazon.awssdk:ssm'
 }
 

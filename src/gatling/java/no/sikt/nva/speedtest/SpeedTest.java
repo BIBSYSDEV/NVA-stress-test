@@ -99,8 +99,6 @@ private static final String TEST_ORGANIZATION = "194";
         .exec(nvi);
 
   {
-      System.out.println(Config.ENV);
-      System.out.println(Config.CLIENT_ID);
 
       setUp(scn.injectOpen(atOnceUsers(1))).protocols(httpProtocol);
 //      setUp(scn.injectOpen(rampUsers(100).during(60))).protocols(httpProtocol);
