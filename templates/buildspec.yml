@@ -15,7 +15,7 @@ env:
 phases:
   install:
     runtime-versions:
-      java: corretto11
+      java: corretto17
   pre_build:
     commands:
       - export ROLE_ARM=arn:aws:iam::282305091481:role/service-role/codebuild-warmup-service-role
@@ -26,5 +26,5 @@ phases:
       - export CYPRESS_AWS_REGION='eu-west-1'
   build:
     commands:
-      - ./gradlew clean build
-      - ./gradlew gatlingRun-no.sikt.nva.speedtest.SpeedTest -D"awsEnv=${ENV}" -D"apiDomain=${API_DOMAIN}" -D"userPoolId=${USER_POOL_ID}" -D"clientId=${CLIENT_ID}"
+      - gradle clean build
+      - gradle gatlingRun-no.sikt.nva.speedtest.SpeedTest -D"awsEnv=${ENV}" -D"apiDomain=${API_DOMAIN}" -D"userPoolId=${USER_POOL_ID}" -D"clientId=${CLIENT_ID}"
