@@ -86,7 +86,13 @@ final class File {
             .headers(headers_24))
         .exec(http("UploadPut")
             .put(NVA_STORAGE_URI + "?uploadId=#{fileUploadId}")
-            .headers(headers_25));
+                .check(jmesPath("*").saveAs("uploadResponse"))
+            .headers(headers_25))
+                .exec(session -> {
+                    System.out.println(session.getString("uploadResponse"));
+                    return session;
+                });
+
 
     static ChainBuilder complete =
         exec(http("UploadCompleteOptions")
