@@ -21,7 +21,7 @@ Parameters:
   GitHubBranch:
     Description: GitHub repo branch name. It defaults to main if not specified.
     Type: String
-    Default: master
+    Default: main
 Resources:
   CodeBuildWarmupProject:
     Type: AWS::CodeBuild::Project
