@@ -11,6 +11,7 @@ import static io.gatling.javaapi.http.HttpDsl.http;
 
 public class Nvi {
 
+
     private static final Map<CharSequence, String> headers_1 = Map.ofEntries(
             Map.entry("authorization", "Bearer #{accessToken}"),
             Map.entry("sec-ch-ua", "Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24"),
@@ -20,6 +21,7 @@ public class Nvi {
             Map.entry("sec-fetch-mode", "cors"),
             Map.entry("sec-fetch-site", "same-site")
     );
+
 
     public static final ChainBuilder query =
         exec(http("QueryCandidatesOptions")

@@ -51,6 +51,8 @@ public final class Aws {
             accessToken = authResponse.authenticationResult().accessToken();
         }
 
+        System.out.println(accessToken);
+
         return accessToken;
     }
 }

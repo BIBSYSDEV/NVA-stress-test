@@ -101,6 +101,5 @@ private static final String TEST_ORGANIZATION = "194";
   {
 
       setUp(scn.injectOpen(atOnceUsers(1))).protocols(httpProtocol);
-//      setUp(scn.injectOpen(rampUsers(100).during(60))).protocols(httpProtocol);
   }
 }
