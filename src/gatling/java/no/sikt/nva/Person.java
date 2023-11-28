@@ -50,13 +50,18 @@ public class Person {
         .headers(headers_5));
 
     public static final ChainBuilder personsByOrganization =
-        exec(session -> {
+            exec(session -> {
                 System.out.println(session.getString("organizationId"));
                 return session;
             })
-        .exec(http("PersonsByOrganization")
-            .get("/cristin/organization/#{organizationId}.0.0.0/persons")
-            .check(jmesPath("hits[0].identifiers[0].value").ofString().saveAs("personId")));
+    .exec(http("PersonsByOrganization")
+            .get("/cristin/organization/#{organizationId}/persons")
+            .check(jmesPath("*").ofString().saveAs("personResponse"))
+            .check(jmesPath("hits[0].identifiers[0].value").ofString().saveAs("personId")))
+                .exec(session -> {
+                    System.out.println(session.getString("personResponse"));
+                    return session;
+                });
 
     public static final ChainBuilder employments =
         exec(http("EmploymentsOptions")

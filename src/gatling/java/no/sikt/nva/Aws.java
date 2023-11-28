@@ -26,8 +26,6 @@ public final class Aws {
 
     public static String login(String userName) {
 
-        System.out.println(USER_POOL_ID);
-
         var accessToken = "";
         try (var identityProvider = CognitoIdentityProviderClient.builder().build()) {
             var authParameters = new HashMap<String, String>();

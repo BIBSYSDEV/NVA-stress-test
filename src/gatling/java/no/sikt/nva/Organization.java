@@ -10,7 +10,7 @@ public class Organization {
 
     public static final ChainBuilder get =
         exec(http("Organization")
-            .get("/cristin/organization/#{organizationId}.0.0.0"));
+            .get("/cristin/organization/#{organizationId}"));
 
     public static final ChainBuilder query =
         exec(http("QueryOrganization")

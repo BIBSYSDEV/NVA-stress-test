@@ -5,6 +5,7 @@ import io.gatling.javaapi.core.ChainBuilder;
 import java.util.Map;
 
 import static io.gatling.javaapi.core.CoreDsl.*;
+import static io.gatling.javaapi.http.HttpDsl.header;
 import static io.gatling.javaapi.http.HttpDsl.http;
 
 final class File {
@@ -59,7 +60,6 @@ final class File {
             exec(http("File")
                     .get("/download/public/#{identifier}/files/#{fileIdentifier}"));
 
-
     static ChainBuilder create =
         exec(http("UploadCreateOptions")
             .options("/upload/create")
@@ -72,27 +72,25 @@ final class File {
             .body(RawFileBody("no/sikt/nva/fullregistration/0021_request.json")));
 
     static ChainBuilder prepare =
-        exec(http("UploadPrepareOptions")
+        exec(session -> session.set("filePayload", "test file".getBytes()))
+        .exec(http("UploadPrepareOptions")
             .options("/upload/prepare")
             .headers(headers_20))
         .exec(http("UploadPrepare")
             .post("/upload/prepare")
+            .check(jmesPath("*").ofList().transform(response -> response.get(0)).saveAs("presignedUri"))
             .headers(headers_21)
             .body(ElFileBody("no/sikt/nva/fullregistration/0023_request.json")));
 
     static ChainBuilder put =
         exec(http("UploadPutOptions")
-            .options(NVA_STORAGE_URI + "?uploadId=#{fileUploadId}")
+            .options("#{presignedUri}")
             .headers(headers_24))
         .exec(http("UploadPut")
-            .put(NVA_STORAGE_URI + "?uploadId=#{fileUploadId}")
-                .check(jmesPath("*").saveAs("uploadResponse"))
+            .put( "#{presignedUri}")
+        .check(header("ETag").saveAs("ETag"))
             .headers(headers_25))
-                .exec(session -> {
-                    System.out.println(session.getString("uploadResponse"));
-                    return session;
-                });
-
+        .exec(session -> session.set("ETag", session.getString("ETag").replace("\"", "")));
 
     static ChainBuilder complete =
         exec(http("UploadCompleteOptions")
@@ -102,6 +100,4 @@ final class File {
             .post("/upload/complete")
             .headers(headers_21)
             .body(ElFileBody("no/sikt/nva/fullregistration/0027_request.json")));
-
-
 }

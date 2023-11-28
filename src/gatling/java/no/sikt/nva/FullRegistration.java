@@ -8,6 +8,8 @@ import static io.gatling.javaapi.http.HttpDsl.*;
 
 public class FullRegistration extends Simulation {
 
+  private static final String NVA_API_URI = "https://" + Config.API_DOMAIN;
+  private static final String TEST_ORGANIZATION = "194";
   private static final HttpProtocolBuilder httpProtocol = http
           .baseUrl("https://api.e2e.nva.aws.unit.no")
           .inferHtmlResources(AllowList(), DenyList(".*\\.js", ".*\\.css", ".*\\.gif", ".*\\.jpeg", ".*\\.jpg", ".*\\.ico", ".*\\.woff", ".*\\.woff2", ".*\\.(t|o)tf", ".*\\.png", ".*\\.svg", ".*detectportal\\.firefox\\.com.*"))
@@ -17,6 +19,9 @@ public class FullRegistration extends Simulation {
           .userAgentHeader("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36");
 
   private static final ScenarioBuilder scn = scenario("FullRegistration")
+          .exec(session -> session.set("accessToken", Aws.login("Dataporten_c924937b-f153-4836-bb7a-401893b27ba8")))
+          .exec(session -> session.set("apiUri", NVA_API_URI))
+          .exec(session -> session.set("organizationId", TEST_ORGANIZATION))
           .exec(StartPage.startPageLogin)
           .pause(5)
           .exec(Publication.create)
@@ -29,26 +34,29 @@ public class FullRegistration extends Simulation {
           .pause(5)
           .exec(Journal.get)
           .pause(5)
+          .exec(Person.personsByOrganization)
+          .pause(5)
           .exec(Person.get)
           .exec(Organization.get)
           .pause(9)
-//          .exec(File.create)
-//          .pause(5)
-//          .exec(File.prepare)
-//          .pause(5)
-//          .exec(File.put)
-//          .pause(5)
-//          .exec(File.complete)
+          .exec(File.create)
+          .pause(5)
+          .exec(File.prepare)
+          .pause(5)
+          .exec(File.put)
+          .pause(5)
+          .exec(File.complete)
           .pause(5)
           .exec(Publication.put)
           .exec(Publication.ticketsForPublication)
           .exec(Publication.get)
-//          .exec(File.get)
+          .exec(File.get)
           .exec(Search.associatedRegistrations)
           .exec(Project.get)
-          .exec(Journal.get);
+          .exec(Journal.get)
+          ;
   {
-//    setUp(scn.injectOpen(atOnceUsers(1))).protocols(httpProtocol);
-	  setUp(scn.injectOpen(rampUsers(100).during(60))).protocols(httpProtocol);
+    setUp(scn.injectOpen(atOnceUsers(1))).protocols(httpProtocol);
+//	  setUp(scn.injectOpen(rampUsers(100).during(60))).protocols(httpProtocol);
   }
 }
