@@ -28,10 +28,7 @@ public class Nvi {
             .get("/scientific-index/candidate")
                 .check(jmesPath("*").ofString().saveAs("queryResponse"))
                 .check(jmesPath("hits[0].identifier").ofString().saveAs("candidateId"))
-            .headers(headers_1)))
-                .exec(session -> {
-                    return session;
-                });
+            .headers(headers_1)));
 
     public static final ChainBuilder get =
     query.exec(http("GetCandidateOptions")

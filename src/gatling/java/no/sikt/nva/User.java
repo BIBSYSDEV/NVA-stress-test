@@ -30,9 +30,9 @@ public class User {
 
     public static final ChainBuilder query =
         Customer.list.exec(http("QueryUsersOptions")
-        .options("/users-roles/institutions/users?institution=https%3A%2F%2Fapi.test.nva.aws.unit.no%2Fcustomer%2F#{customerId}")
+        .options("/users-roles/institutions/users?institution=https%3A%2F%2Fapi." + Config.ENV + ".nva.aws.unit.no%2Fcustomer%2F#{customerId}")
         .resources(http("QueryUsers")
-            .get("/users-roles/institutions/users?institution=https%3A%2F%2Fapi.test.nva.aws.unit.no%2Fcustomer%2F#{customerId}")
+            .get("/users-roles/institutions/users?institution=https%3A%2F%2Fapi." + Config.ENV + ".nva.aws.unit.no%2Fcustomer%2F#{customerId}")
             .check(jmesPath("users[0].username").ofString().saveAs("username"))
             .headers(HEADERS)));
 

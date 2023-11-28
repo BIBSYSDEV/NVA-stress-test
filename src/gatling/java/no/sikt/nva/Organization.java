@@ -18,6 +18,5 @@ public class Organization {
                 .check(jmesPath("hits[0].id")
                         .ofString()
                         .transform(uri -> uri.split("/")[uri.split("/").length - 1])
-                        .transform(id -> id.replace(".0.0.0", ""))
                         .saveAs("organizationId")));
 }
