@@ -15,7 +15,7 @@ public final class Customer {
             Map.entry("accept", "*/*"),
             Map.entry("access-control-request-headers", "authorization"),
             Map.entry("access-control-request-method", "GET"),
-            Map.entry("origin", "https://" + Config.ENV + ".nva.aws.unit.no"),
+            Map.entry("origin", "https://" + Config.DOMAIN),
             Map.entry("sec-fetch-dest", "empty"),
             Map.entry("sec-fetch-mode", "cors"),
             Map.entry("sec-fetch-site", "same-site")
@@ -23,7 +23,7 @@ public final class Customer {
 
     private static final Map<CharSequence, String> headers_1 = Map.ofEntries(
             Map.entry("authorization", "Bearer #{accessToken}"),
-            Map.entry("origin", "https://" + Config.ENV + ".nva.aws.unit.no"),
+            Map.entry("origin", "https://" + Config.DOMAIN),
             Map.entry("sec-ch-ua", "Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99"),
             Map.entry("sec-ch-ua-mobile", "?0"),
             Map.entry("sec-ch-ua-platform", "Windows"),
@@ -88,7 +88,7 @@ public final class Customer {
 
     public static final ChainBuilder findCustomerByCristinId =
         exec(http("CustomerByCristinIdOptions")
-        .options("/customer/cristinId/https%3A%2F%2F" + Config.ENV + ".dev.nva.aws.unit.no%2Fcristin%2Forganization%2F#{customerCristinId}")
+        .options("/customer/cristinId/https%3A%2F%2F" + Config.DOMAIN + "%2Fcristin%2Forganization%2F#{customerCristinId}")
         .headers(headers_0)
         .resources(http("CustomerByCristinId")
             .get("/customer/cristinId/https%3A%2F%2F" + Config.API_DOMAIN + "%2Fcristin%2Forganization%2F#{customerCristinId}")

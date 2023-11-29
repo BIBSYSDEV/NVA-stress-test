@@ -13,7 +13,7 @@ final class File {
             Map.entry("accept", "*/*"),
             Map.entry("access-control-request-headers", "authorization,content-type"),
             Map.entry("access-control-request-method", "POST"),
-            Map.entry("origin", "https://" + Config.ENV + ".nva.aws.unit.no"),
+            Map.entry("origin", "https://" + Config.DOMAIN),
             Map.entry("sec-fetch-dest", "empty"),
             Map.entry("sec-fetch-mode", "cors"),
             Map.entry("sec-fetch-site", "same-site")
@@ -22,7 +22,7 @@ final class File {
     private static final Map<CharSequence, String> headers_21 = Map.ofEntries(
             Map.entry("authorization", "Bearer #{accessToken}"),
             Map.entry("content-type", "application/json"),
-            Map.entry("origin", "https://" + Config.ENV + ".nva.aws.unit.no"),
+            Map.entry("origin", "https://" + Config.DOMAIN),
             Map.entry("sec-ch-ua", "Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99"),
             Map.entry("sec-ch-ua-mobile", "?0"),
             Map.entry("sec-ch-ua-platform", "Windows"),
@@ -35,7 +35,7 @@ final class File {
             Map.entry("Accept", "*/*"),
             Map.entry("Access-Control-Request-Headers", "content-type"),
             Map.entry("Access-Control-Request-Method", "PUT"),
-            Map.entry("Origin", "https://" + Config.ENV + ".nva.aws.unit.no"),
+            Map.entry("Origin", "https://" + Config.DOMAIN),
             Map.entry("Sec-Fetch-Dest", "empty"),
             Map.entry("Sec-Fetch-Mode", "cors"),
             Map.entry("Sec-Fetch-Site", "cross-site")
@@ -44,7 +44,7 @@ final class File {
     private static final Map<CharSequence, String> headers_25 = Map.ofEntries(
             Map.entry("Accept", "*/*"),
             Map.entry("Content-Type", "application/json"),
-            Map.entry("Origin", "https://" + Config.ENV + ".nva.aws.unit.no"),
+            Map.entry("Origin", "https://" + Config.DOMAIN),
             Map.entry("Sec-Fetch-Dest", "empty"),
             Map.entry("Sec-Fetch-Mode", "cors"),
             Map.entry("Sec-Fetch-Site", "cross-site"),

@@ -75,12 +75,14 @@ class StartPage {
                 ((List<?>) ((List<?>) session.getList("login")).get(0)).forEach(item ->
                     attributeMap.put((String) ((Map<?, ?>) item).get("Name"), (String) ((Map<?, ?>) item).get("Value")));
                 session = session.set("customerUri", attributeMap.get("custom:customerId"));
+                session = session.set("customerId", attributeMap.get("custom:customerId")
+                        .replace("https://" + Config.API_DOMAIN + "/customer/", ""));
                 session = session.set("cristinId", attributeMap
                                     .get("custom:cristinId")
-                                    .replace("https://api.e2e.nva.aws.unit.no/cristin/person/", ""));
+                                    .replace("https://" + Config.API_DOMAIN + "/cristin/person/", ""));
                 session = session.set("organizationId", attributeMap
                                     .get("custom:topOrgCristinId")
-                                    .replace("https://api.e2e.nva.aws.unit.no/cristin/organization/", ""));
+                                    .replace("https://" + Config.API_DOMAIN + "/cristin/organization/", ""));
                 return session;
             })
             .exec(Customer.get)
