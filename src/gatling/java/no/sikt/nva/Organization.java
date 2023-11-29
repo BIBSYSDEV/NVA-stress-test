@@ -10,7 +10,7 @@ public class Organization {
 
     public static final ChainBuilder get =
         exec(http("Organization")
-            .get("/cristin/organization/#{organizationId}.0.0.0"));
+            .get("/cristin/organization/#{organizationId}"));
 
     public static final ChainBuilder query =
         exec(http("QueryOrganization")
@@ -18,6 +18,5 @@ public class Organization {
                 .check(jmesPath("hits[0].id")
                         .ofString()
                         .transform(uri -> uri.split("/")[uri.split("/").length - 1])
-                        .transform(id -> id.replace(".0.0.0", ""))
                         .saveAs("organizationId")));
 }
