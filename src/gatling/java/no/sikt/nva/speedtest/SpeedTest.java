@@ -2,7 +2,6 @@ package no.sikt.nva.speedtest;
 
 import io.gatling.javaapi.core.*;
 import io.gatling.javaapi.http.*;
-import net.sf.saxon.om.Chain;
 import no.sikt.nva.*;
 
 import static io.gatling.javaapi.core.CoreDsl.*;
@@ -24,7 +23,7 @@ private static final String TEST_ORGANIZATION = "194";
 
     private static final ChainBuilder cristin =
             exec(Cristin.listFundingSources)
-            .exec(Cristin.getFundingSources)
+            .exec(Cristin.getFundingSource)
             .exec(Cristin.picture)
             .exec(Cristin.keywords)
             .exec(Cristin.positions);

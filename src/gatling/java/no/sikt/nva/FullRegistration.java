@@ -30,9 +30,9 @@ public class FullRegistration extends Simulation {
           .pause(5)
           .exec(Project.get)
           .pause(5)
-          .exec(Journal.query)
-          .pause(5)
-          .exec(Journal.get)
+//          .exec(Journal.get)
+//          .pause(5)
+          .exec(Cristin.getFundingSource)
           .pause(5)
           .exec(Person.personsByOrganization)
           .pause(5)
@@ -48,15 +48,21 @@ public class FullRegistration extends Simulation {
           .exec(File.complete)
           .pause(5)
           .exec(Publication.put)
+          .pause(5)
           .exec(Publication.ticketsForPublication)
+          .pause(5)
           .exec(Publication.get)
+          .pause(5)
           .exec(File.get)
+          .pause(5)
           .exec(Search.associatedRegistrations)
+          .pause(5)
           .exec(Project.get)
-          .exec(Journal.get)
+          .pause(5)
+//          .exec(Journal.get)
           ;
   {
-    setUp(scn.injectOpen(atOnceUsers(1))).protocols(httpProtocol);
-//	  setUp(scn.injectOpen(rampUsers(100).during(60))).protocols(httpProtocol);
+//    setUp(scn.injectOpen(atOnceUsers(1))).protocols(httpProtocol);
+	  setUp(scn.injectOpen(rampUsers(500).during(300))).protocols(httpProtocol);
   }
 }

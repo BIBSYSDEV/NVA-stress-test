@@ -38,7 +38,7 @@ public class Cristin {
                     .transform(uri -> uri.split("/")[uri.split("/").length -1])
                     .saveAs("fundingSourceId")));
 
-    public static final ChainBuilder getFundingSources =
+    public static final ChainBuilder getFundingSource =
         listFundingSources.exec(http("GetFundingSource")
         .get("/cristin/funding-sources/#{fundingSourceId}"));
 

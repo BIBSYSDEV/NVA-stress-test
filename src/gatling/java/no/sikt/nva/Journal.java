@@ -21,7 +21,6 @@ public final class Journal {
     );
 
     private static final Map<CharSequence, String> headers_4 = Map.ofEntries(
-            Map.entry("authorization", "Bearer #{accessToken}"),
             Map.entry("origin", "https://" + Config.DOMAIN),
             Map.entry("sec-ch-ua", "Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99"),
             Map.entry("sec-ch-ua-mobile", "?0"),
@@ -31,7 +30,7 @@ public final class Journal {
             Map.entry("sec-fetch-site", "same-site")
     );
 
-    public static final String JOURNAL_QUERY = "/publication-channels-v2/journal?query=physics&year=2023";
+    public static final String JOURNAL_QUERY = "/publication-channels-v2/journal?query=chemical&year=2023&offset=0&size=10";
 
     public static final ChainBuilder query =
         exec(http("QueryJournal")
@@ -42,7 +41,14 @@ public final class Journal {
                 .check(jmesPath("hits[0].id").ofString().transform(uri ->
                                 uri.split("/")[uri.split("/").length - 2])
                         .saveAs("journalId"))
-            .headers(headers_4));
+                .check(jmesPath("hits[0].id").ofString().saveAs("journalUri"))
+                .check(jmesPath("*").ofString().saveAs("journalResponse"))
+            .headers(headers_4))
+        .exec(session -> {
+            System.out.println(session.getString("journalResponse"));
+            return session;
+        })
+            ;
 
     public static final ChainBuilder get =
         query.exec(http("GetJournal")

@@ -30,7 +30,7 @@ public class Person {
     );
 
     private static final Map<CharSequence, String> headers_5 = Map.ofEntries(
-            Map.entry("origin", "https://test.nva.aws.unit.no"),
+            Map.entry("origin", "https://api.dev.nva.aws.unit.no"),
             Map.entry("sec-ch-ua", "Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99"),
             Map.entry("sec-ch-ua-mobile", "?0"),
             Map.entry("sec-ch-ua-platform", "Windows"),
@@ -41,7 +41,12 @@ public class Person {
 
     public static final ChainBuilder query =
         exec(http("QueryPersons")
-        .get("/cristin/person?name=eirik%20nilsen"));
+        .get("/cristin/person?name=eirik%20nilsen")
+            .check(jmesPath("hits[0].id")
+                    .ofString()
+                    .transform(uri ->
+                            uri.split("/")[uri.split("/").length - 1])
+                    .saveAs("personId")));
 
 
     public static ChainBuilder get =
@@ -53,7 +58,9 @@ public class Person {
     exec(http("PersonsByOrganization")
         .get("/cristin/organization/#{organizationId}/persons")
         .check(jmesPath("*").ofString().saveAs("personResponse"))
-        .check(jmesPath("hits[0].identifiers[0].value").ofString().saveAs("personId")));
+        .check(jmesPath("hits[0].identifiers[0].value")
+                .ofString()
+                .saveAs("personId")));
 
     public static final ChainBuilder employments =
         exec(http("EmploymentsOptions")

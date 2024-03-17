@@ -21,7 +21,7 @@ public final class Project {
     );
 
     public static final ChainBuilder get =
-            exec(http("Project")
+            exec(http("GetProject")
                 .get("#{projectUri}"));
 
     public static final ChainBuilder query =
